@@ -28,3 +28,29 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 You can then execute your native executable with: `./target/grpc-example-1.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/building-native-image.
+
+# Docker Images
+
+https://quarkus.io/guides/container-image#building
+
+## Build with Docker
+
+Just run 
+
+```
+docker build -f src/main/docker/Dockerfile .
+```
+
+## non-native docker image
+
+```
+./mvnw clean package -Dquarkus.container-image.build=true
+```
+
+## native Docker image
+
+Builds native image in a container to have right architecture.
+
+```
+./mvnw clean package -Dquarkus.container-image.build=true -Pnative -Dquarkus.native.container-build=true
+```
