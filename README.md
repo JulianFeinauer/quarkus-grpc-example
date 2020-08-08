@@ -38,7 +38,7 @@ https://quarkus.io/guides/container-image#building
 Just run 
 
 ```
-docker build -f src/main/docker/Dockerfile .
+docker build -f src/main/docker/Dockerfile.jvm .
 ```
 
 ## non-native docker image
