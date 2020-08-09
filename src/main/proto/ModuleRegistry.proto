@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.pragmaticindustries.dc";
+// option java_outer_classname = "HelloWorldProto";
+
+package modules;
+
+// Module Registry Definition
+service ModuleRegistry {
+  // Register a module
+  rpc Register (RegistrationRequest) returns (RegistrationResponse) {}
+
+  rpc Unregister (UnregistrationRequest) returns (UnregistrationResponse) {}
+
+  rpc List (ListRequest) returns (ListResponse) {}
+
+  rpc AsyncList (ListRequest) returns (stream ModuleIdentifier) {}
+
+  rpc FindInstances (FindInstancesRequest) returns (FindInstancesResponse) {}
+}
+
+message ListRequest {
+  // Empty at this time
+}
+
+message ListResponse {
+  repeated ModuleIdentifier modules = 1;
+}
+
+// Identifier of a Module
+message ModuleIdentifier {
+  string company = 1;
+  string app = 2;
+  string version = 3;
+}
+
+// Request for Unregistration
+message UnregistrationRequest {
+  ModuleIdentifier id = 1;
+}
+
+// Response for Unregistration
+message UnregistrationResponse {
+  bool success = 1;
+}
+
+// Request for Registration
+message RegistrationRequest {
+  ModuleIdentifier id = 1;
+}
+
+// Registration Response
+message RegistrationResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message FindInstancesRequest {
+  string company = 1;
+  string app = 2;
+  string version = 3;
+}
+
+message FindInstancesResponse {
+  repeated ModuleIdentifier matches = 1;
+}
